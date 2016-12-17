@@ -63,7 +63,12 @@ function getArtists(location, callback) {
       return callback(`I encountered an error ${res.statusCode} looking up ${articleName}, sorry.`);
     } else {
       // data is already parsed as JSON:
-      return callback(data.topartists.artist);
+      try {
+        return callback(data.topartists.artist);
+      } catch (e) {
+        console.log(e);
+        return callback("Failed to parse JSON, sorry.");
+      }
     }
   });
 }
